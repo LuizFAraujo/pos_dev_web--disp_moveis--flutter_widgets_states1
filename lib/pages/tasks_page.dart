@@ -13,47 +13,62 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPageState extends State<TasksPage> {
-  final List<Task> tasks = []; // Lista de tarefas
+  // Lista de tarefas iniciais (simulação realista)
+  final List<TaskModel> _tasks = [
+    TaskModel(title: 'Estudar widgets Stateful e Stateless', isDone: true),
+    TaskModel(title: 'Implementar ReactionBar na Home', isDone: false),
+    TaskModel(title: 'Revisar organização do projeto', isDone: false),
+    TaskModel(title: 'Finalizar tela de configurações', isDone: true),
+  ];
 
-  // Adiciona uma nova tarefa à lista
-  void addTask(String title) {
-    setState(() => tasks.add(Task(title: title)));
+  // Adiciona uma nova tarefa
+  void _addTask(String title) {
+    if (title.trim().isEmpty) return;
+    setState(() => _tasks.add(TaskModel(title: title)));
   }
 
-  // Alterna o status (feito/não feito) da tarefa
-  void toggleTask(Task task) {
-    setState(() => task.isDone = !task.isDone);
+  // Alterna o estado de conclusão de uma tarefa
+  void _toggleTask(int index) {
+    setState(() => _tasks[index].isDone = !_tasks[index].isDone);
   }
 
-  // Remove uma tarefa da lista
-  void removeTask(Task task) {
-    setState(() => tasks.remove(task));
+  // Remove tarefas que já estão concluídas
+  void _clearCompleted() {
+    setState(() => _tasks.removeWhere((task) => task.isDone));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Minhas Tarefas'), // Título da página
-        actions: const [HeaderActions()], // Botões de ações no topo
+        title: const Text('Lista de Tarefas'),
+        actions: [
+          IconButton(
+            tooltip: 'Limpar concluídas',
+            onPressed: _clearCompleted,
+            icon: const Icon(Icons.cleaning_services_outlined),
+          ),
+          HeaderActions(), // botão de tema no topo
+        ],
       ),
       body: Column(
         children: [
-          TaskInput(onSubmit: addTask), // Campo de entrada para nova tarefa
+          // Campo de entrada para nova tarefa
+          TaskInput(onSubmit: _addTask),
+          const SizedBox(height: 12),
           Expanded(
-            child: ListView(
-              children:
-                  tasks.map((task) {
-                    return TaskTile(
-                      task: task, // Exibe a tarefa
-                      onToggle:
-                          () => toggleTask(task), // Alterna status ao clicar
-                      onDelete:
-                          () => removeTask(
-                            task,
-                          ), // Remove ao clicar no ícone de deletar
-                    );
-                  }).toList(),
+            child: ListView.separated(
+              padding: const EdgeInsets.only(bottom: 12),
+              itemCount: _tasks.length,
+              separatorBuilder: (_, __) => const Divider(height: 1),
+              itemBuilder: (context, index) {
+                final task = _tasks[index];
+                return TaskTile(
+                  task: task,
+                  onToggle: () => _toggleTask(index),
+                  onDelete: () => setState(() => _tasks.removeAt(index)),
+                );
+              },
             ),
           ),
         ],

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/task_model.dart';
 
 class TaskTile extends StatelessWidget {
-  final Task task; // Tarefa a ser exibida
+  final TaskModel task; // Tarefa a ser exibida
   final VoidCallback onToggle; // Função chamada ao marcar/desmarcar a tarefa
   final VoidCallback onDelete; // Função chamada ao clicar no botão de deletar
 
