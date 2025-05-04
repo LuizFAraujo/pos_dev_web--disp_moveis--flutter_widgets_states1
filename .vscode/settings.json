@@ -64,7 +64,7 @@
     ".metadata": true,
     "*.yaml": true,
     "pubspec.lock": true,
-    "test": true,
+    // "test": true,
     "android": true,
     "web": true,
     "build": true,
