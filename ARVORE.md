@@ -1,9 +1,9 @@
+# Árvore do projeto
+
 project_root/
 ├── android/
 │
 ├── lib/
-│   └── main.dart
-│   lib/
 │   ├── main.dart                           # Entry point com Provider
 │   ├── app.dart                            # MaterialApp com rotas e nav
 │   │

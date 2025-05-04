@@ -1,30 +1,36 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:pos_dev_web_disp_moveis_flutter_widgets_states1/main.dart';
+import 'package:pos_dev_web_disp_moveis_flutter_widgets_states1/app.dart';
+import 'package:pos_dev_web_disp_moveis_flutter_widgets_states1/controllers/theme_controller.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets(
+    'Deve renderizar a home com texto inicial e mudar tema ao clicar no botão',
+    (WidgetTester tester) async {
+      // Monta o app com o provider necessário
+      await tester.pumpWidget(
+        ChangeNotifierProvider(
+          create: (_) => ThemeController(),
+          child: const MyApp(),
+        ),
+      );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      // Espera a primeira renderização
+      await tester.pumpAndSettle();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      // Verifica se o título "InteraHub" aparece (home page)
+      expect(find.text('InteraHub'), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+      // Verifica se o botão de alternar tema está presente (ícone de lua ou sol)
+      expect(find.byIcon(Icons.dark_mode), findsOneWidget);
+
+      // Clica no botão de alternar tema
+      await tester.tap(find.byIcon(Icons.dark_mode));
+      await tester.pumpAndSettle();
+
+      // Após o clique, o ícone deve mudar (alternância de tema)
+      expect(find.byIcon(Icons.light_mode), findsOneWidget);
+    },
+  );
 }
