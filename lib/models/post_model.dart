@@ -1,8 +1,17 @@
-class Post {
-  final String content; // Conteúdo do post
+// Modelo de dados para uma postagem
+
+class PostModel {
+  final String title; // Título da postagem
+  final String subtitle; // Subtítulo (autor/data)
+  final String content; // Corpo do texto
   int likes; // Quantidade de curtidas
   int dislikes; // Quantidade de descurtidas
 
-  // Construtor: exige o conteúdo e inicia likes/dislikes com zero por padrão
-  Post({required this.content, this.likes = 0, this.dislikes = 0});
+  PostModel({
+    required this.title,
+    required this.subtitle,
+    required this.content,
+    this.likes = 0,
+    this.dislikes = 0,
+  });
 }

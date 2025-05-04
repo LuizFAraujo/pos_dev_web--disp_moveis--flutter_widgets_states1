@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../models/post_model.dart';
 
+// Widget que exibe a barra de reações (👍 👎)
 class ReactionBar extends StatefulWidget {
-  final Post post; // Post que será manipulado (likes/dislikes)
+  final PostModel post; // Post que será manipulado (likes/dislikes)
 
   const ReactionBar({super.key, required this.post});
 
@@ -22,17 +23,17 @@ class _ReactionBarState extends State<ReactionBar> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(
-          onPressed: _dislike,
-          icon: const Icon(Icons.thumb_down),
-        ), // Botão de dislike
-        Text('${widget.post.dislikes}'), // Exibe total de dislikes
+        // Botão de dislike
+        IconButton(onPressed: _dislike, icon: const Icon(Icons.thumb_down)),
+        // Exibe total de dislikes
+        Text('${widget.post.dislikes}'),
+
         const SizedBox(width: 12),
-        IconButton(
-          onPressed: _like,
-          icon: const Icon(Icons.thumb_up),
-        ), // Botão de like
-        Text('${widget.post.likes}'), // Exibe total de likes
+
+        // Botão de like
+        IconButton(onPressed: _like, icon: const Icon(Icons.thumb_up)),
+        // Exibe total de likes
+        Text('${widget.post.likes}'),
       ],
     );
   }
