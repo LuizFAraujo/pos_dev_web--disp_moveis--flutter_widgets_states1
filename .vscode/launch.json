@@ -1,25 +1,42 @@
 {
-    // Use o IntelliSense para saber mais sobre os atributos possíveis.
-    // Focalizar para exibir as descrições dos atributos existentes.
-    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "pos_dev_web--disp_moveis--flutter_widgets_states1",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "pos_dev_web--disp_moveis--flutter_widgets_states1 (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "pos_dev_web--disp_moveis--flutter_widgets_states1 (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
-    ]
+  // Versão do esquema do launch.json (VS Code)
+  "version": "0.2.0",
+
+  // Lista de configurações de execução do Flutter
+  "configurations": [
+    {
+      // Executa o app Flutter na Web (Google Chrome - modo DEBUG)
+      "name": "Debug Web (Chrome)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "chrome"
+    },
+    {
+      // Executa o app Flutter na Web (Microsoft Edge - modo DEBUG)
+      "name": "Debug Web (Edge)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "edge"
+    },
+    {
+      // Executa o app em modo DEBUG padrão (sem dispositivo fixo)
+      "name": "Executar App (Debug)",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      // Executa o app em modo PROFILE (sem debug, com métricas de performance)
+      "name": "Executar App (Profile)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      // Executa o app em modo RELEASE (build otimizado para produção)
+      "name": "Executar App (Release)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    }
+  ]
 }
