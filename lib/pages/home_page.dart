@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Lista de posts simulados
     final posts = [
       Post(content: 'Lorem ipsum dolor sit amet.'),
       Post(content: 'Ut enim ad minim veniam.'),
@@ -17,12 +18,15 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('InteraHub'),
-        actions: const [HeaderActions()],
+        title: const Text('InteraHub'), // Título da página
+        actions: const [HeaderActions()], // Botão(s) no cabeçalho (ex: tema)
       ),
       body: ListView.builder(
-        itemCount: posts.length,
-        itemBuilder: (context, index) => PostWidget(post: posts[index]),
+        itemCount: posts.length, // Número de posts
+        itemBuilder:
+            (context, index) => PostWidget(
+              post: posts[index],
+            ), // Renderiza cada post usando o widget reutilizável
       ),
     );
   }

@@ -13,16 +13,19 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPageState extends State<TasksPage> {
-  final List<Task> tasks = [];
+  final List<Task> tasks = []; // Lista de tarefas
 
+  // Adiciona uma nova tarefa à lista
   void addTask(String title) {
     setState(() => tasks.add(Task(title: title)));
   }
 
+  // Alterna o status (feito/não feito) da tarefa
   void toggleTask(Task task) {
     setState(() => task.isDone = !task.isDone);
   }
 
+  // Remove uma tarefa da lista
   void removeTask(Task task) {
     setState(() => tasks.remove(task));
   }
@@ -31,20 +34,24 @@ class _TasksPageState extends State<TasksPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Minhas Tarefas'),
-        actions: const [HeaderActions()],
+        title: const Text('Minhas Tarefas'), // Título da página
+        actions: const [HeaderActions()], // Botões de ações no topo
       ),
       body: Column(
         children: [
-          TaskInput(onSubmit: addTask),
+          TaskInput(onSubmit: addTask), // Campo de entrada para nova tarefa
           Expanded(
             child: ListView(
               children:
                   tasks.map((task) {
                     return TaskTile(
-                      task: task,
-                      onToggle: () => toggleTask(task),
-                      onDelete: () => removeTask(task),
+                      task: task, // Exibe a tarefa
+                      onToggle:
+                          () => toggleTask(task), // Alterna status ao clicar
+                      onDelete:
+                          () => removeTask(
+                            task,
+                          ), // Remove ao clicar no ícone de deletar
                     );
                   }).toList(),
             ),

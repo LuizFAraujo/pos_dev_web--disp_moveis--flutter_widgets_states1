@@ -9,11 +9,13 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sobre'),
-        actions: const [HeaderActions()],
+        title: const Text('Sobre'), // Título da AppBar
+        actions: const [
+          HeaderActions(),
+        ], // Ações no cabeçalho (ex: botão de tema)
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0), // Espaçamento interno
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [

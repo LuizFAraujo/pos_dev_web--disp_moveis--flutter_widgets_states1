@@ -10,15 +10,18 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<ThemeController>(context);
+    final controller = Provider.of<ThemeController>(
+      context,
+    ); // Acessa o controller de tema
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Configurações'),
-        actions: [HeaderActions()], // ❌ Removido "const"
+        title: const Text('Configurações'), // Título da página
+        actions: [HeaderActions()], // Ações no cabeçalho (ex: botão de tema)
       ),
       body: ListView(
         children: [
+          // Opção de tema claro com botão de rádio
           SettingsTile(
             title: 'Tema claro',
             trailing: Radio<ThemeMode>(
@@ -29,6 +32,7 @@ class SettingsPage extends StatelessWidget {
               },
             ),
           ),
+          // Opção de tema escuro com botão de rádio
           SettingsTile(
             title: 'Tema escuro',
             trailing: Radio<ThemeMode>(
@@ -39,6 +43,7 @@ class SettingsPage extends StatelessWidget {
               },
             ),
           ),
+          // Opção de tema do sistema com botão de rádio
           SettingsTile(
             title: 'Tema do sistema',
             trailing: Radio<ThemeMode>(
@@ -49,7 +54,8 @@ class SettingsPage extends StatelessWidget {
               },
             ),
           ),
-          const Divider(),
+          const Divider(), // Separador visual
+          // Opções simbólicas adicionais
           const SettingsTile(title: '🔔 Notificações simbólicas'),
           const SettingsTile(title: '🛑 Limpar curtidas'),
           const SettingsTile(title: '🔄 Redefinir tarefas'),

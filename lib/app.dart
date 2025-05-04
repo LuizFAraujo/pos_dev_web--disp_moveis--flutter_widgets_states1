@@ -13,14 +13,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Acessa o controller de tema para aplicar tema claro ou escuro dinamicamente
     final themeController = Provider.of<ThemeController>(context);
+
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false, // Remove o banner de debug
       title: 'InteraHub',
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: themeController.themeMode,
-      home: const _RootNavigation(),
+      theme: lightTheme, // Tema claro definido no config/themes.dart
+      darkTheme: darkTheme, // Tema escuro definido no config/themes.dart
+      themeMode:
+          themeController
+              .themeMode, // Aplica o tema com base na escolha do usuário
+      home: const _RootNavigation(), // Tela inicial com navegação por abas
     );
   }
 }
@@ -33,24 +37,25 @@ class _RootNavigation extends StatefulWidget {
 }
 
 class _RootNavigationState extends State<_RootNavigation> {
-  int _currentIndex = 0;
+  int _currentIndex = 0; // Índice da aba selecionada
 
   final List<Widget> _pages = const [
-    HomePage(),
-    TasksPage(),
-    SettingsPage(),
-    AboutPage(),
+    HomePage(), // Página Inicial
+    TasksPage(), // Página de Tarefas
+    SettingsPage(), // Página de Configurações
+    AboutPage(), // Página Sobre
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
+      body: _pages[_currentIndex], // Exibe a página correspondente à aba atual
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Theme.of(context).disabledColor,
-        onTap: (index) => setState(() => _currentIndex = index),
+        currentIndex: _currentIndex, // Aba selecionada
+        selectedItemColor: Theme.of(context).colorScheme.primary, // Cor ativa
+        unselectedItemColor: Theme.of(context).disabledColor, // Cor inativa
+        onTap:
+            (index) => setState(() => _currentIndex = index), // Atualiza a aba
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Início'),
           BottomNavigationBarItem(
